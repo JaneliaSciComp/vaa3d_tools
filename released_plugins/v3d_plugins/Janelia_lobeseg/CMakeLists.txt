@@ -11,6 +11,8 @@ set(PLUGIN_SOURCES
     ${V3DMAINDIR}/worm_straighten_c/bfs_1root.cpp
 )
 include_directories("${TIFF_INCLUDE_DIR}")
+include_directories(${QT_INCLUDE_DIR})
+
 configure_v3d_plugin(lobeseg)
 
 # Create standalone executable

@@ -2,6 +2,8 @@
 #define FILTER_DIALOG_H
 
 #include <QtGui>
+#include <QtGridLayout>
+#include <QtLineEdit>
 #include <v3d_interface.h>
 #include <vector>
 

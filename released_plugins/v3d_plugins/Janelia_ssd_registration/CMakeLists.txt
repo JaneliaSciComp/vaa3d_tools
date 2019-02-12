@@ -31,6 +31,9 @@ set(PLUGIN_SOURCES
     q_rigidaffine_registration.cpp
     plugin_image_registration.cpp
 )
+
+include_directories(${QT_INCLUDE_DIR})
+
 configure_v3d_plugin(plugin_PQ_imagereg)
 target_link_libraries(plugin_PQ_imagereg
     ${TIFF_LIBRARY}

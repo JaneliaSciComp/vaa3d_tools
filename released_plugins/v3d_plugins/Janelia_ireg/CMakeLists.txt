@@ -9,6 +9,8 @@ set(PLUGIN_SOURCES
 include_directories(
     "${TIFF_INCLUDE_DIR}"
 )
+include_directories(${QT_INCLUDE_DIR})
+
 configure_v3d_plugin(ireg)
 find_library(ZLIB z)
 target_link_libraries(ireg mylib_tiff ${ZLIB})

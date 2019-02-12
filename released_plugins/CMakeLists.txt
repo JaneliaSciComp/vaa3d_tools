@@ -6,8 +6,57 @@ endif(COMMAND CMAKE_POLICY)
 project(v3d_extra_plugins) # those plugins are distributed in seperate repo (vaa3d_tools)  than the truck code
 
 
-find_package(Qt4 REQUIRED)
-include( ${QT_USE_FILE} )
+IF (DESIRED_QT_VERSION MATCHES 5)
+  find_package(Qt5 COMPONENTS Core Widgets Xml Network OpenGL Concurrent REQUIRED)
+
+   macro(qt_use_modules)
+        qt5_use_modules(${ARGN})
+   endmacro()
+
+   macro(qt_wrap_ui)
+       qt5_wrap_ui(${ARGN})
+   endmacro()
+
+   macro(qt_add_resources)
+       qt5_add_resources(${ARGN})
+   endmacro()
+
+   macro(qt_add_translation)
+       qt5_add_translation(${ARGN})
+   endmacro()
+
+   add_definitions(-DUSE_Qt5)
+   include_directories( ${Qt5Widgets_INCLUDE_DIRS} ${Qt5Network_INCLUDE_DIRS}
+                        ${Qt5Xml_INCLUDE_DIRS} ${Qt5OpenGL_INCLUDE_DIRS}
+                        ${Qt5Concurrent_INCLUDE_DIRS})
+endif()
+
+if(DESIRED_QT_VERSION MATCHES 4 OR NOT Qt5Core_FOUND)
+  find_package(Qt4 REQUIRED)
+  set(QT_USE_NETWORK TRUE) # Oct-07-2010 CMB
+  set(QT_USE_XML TRUE) # Oct-22-2010 CMB
+
+   macro(qt_use_modules)
+        qt4_use_modules(${ARGN})
+   endmacro()
+
+   macro(qt_wrap_ui)
+        qt4_wrap_ui(${ARGN})
+   endmacro()
+
+   macro(qt_add_resources)
+        qt4_add_resources(${ARGN})
+   endmacro()
+
+   macro(qt_add_translation)
+        qt4_add_translation(${ARGN})
+   endmacro()
+
+  include( ${QT_USE_FILE} )
+  include_directories( ${QT_INCLUDES} )
+endif()
+
+#include( ${QT_USE_FILE} )
 
 find_library(TIFF_LIBRARY
     NAMES libv3dtiff.a v3dtiff libtiff

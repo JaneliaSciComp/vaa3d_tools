@@ -9,7 +9,8 @@ include_directories( ${CMAKE_SOURCE_DIR} )
 
 set(QtITK_SRCS ${PLUGIN_SOURCES} )
 
-qt4_wrap_cpp(QT_MOC_SRCS ${PLUGIN_HEADERS})
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTOUIC ON)
 
 configure_v3d_plugin_common(${PLUGIN_NAME})
 
